@@ -617,7 +617,7 @@ declare namespace GoogleAppsScript {
      * the number scale and the color applied to the cell is interpolated based
      * on the cell content's proximity to the gradient condition min, mid, and
      * max points.
-     * 
+     *
      * // Logs all the information inside gradient conditional format rules on * a sheet.
      * var sheet = SpreadsheetApp.getActiveSheet();
      * var rules = sheet.getConditionalFormatRules();
@@ -982,12 +982,14 @@ declare namespace GoogleAppsScript {
       setActiveSelection(range: Range): Range;
       setActiveSelection(a1Notation: string): Range;
       setColumnWidth(columnPosition: Integer, width: Integer): Sheet;
+      setColumnWidths(startColumn: Integer, numColumns: Integer, width: Integer): Sheet;
       setConditionalFormatRules(rules: ReadonlyArray<ConditionalFormatRule>): void;
       setCurrentCell(cell: Range): void;
       setFrozenColumns(columns: Integer): void;
       setFrozenRows(rows: Integer): void;
       setName(name: string): Sheet;
       setRowHeight(rowPosition: Integer, height: Integer): Sheet;
+      setRowHeights(startRow: Integer, numRows: Integer, height: Integer): Sheet;
       setTabColor(color: string): Sheet;
       showColumns(columnIndex: Integer): void;
       showColumns(columnIndex: Integer, numColumns: Integer): void;
