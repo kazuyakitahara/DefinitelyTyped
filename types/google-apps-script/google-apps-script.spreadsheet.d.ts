@@ -175,6 +175,12 @@ declare namespace GoogleAppsScript {
     export enum DataValidationCriteria { DATE_AFTER, DATE_BEFORE, DATE_BETWEEN, DATE_EQUAL_TO, DATE_IS_VALID_DATE, DATE_NOT_BETWEEN, DATE_ON_OR_AFTER, DATE_ON_OR_BEFORE, NUMBER_BETWEEN, NUMBER_EQUAL_TO, NUMBER_GREATER_THAN, NUMBER_GREATER_THAN_OR_EQUAL_TO, NUMBER_LESS_THAN, NUMBER_LESS_THAN_OR_EQUAL_TO, NUMBER_NOT_BETWEEN, NUMBER_NOT_EQUAL_TO, TEXT_CONTAINS, TEXT_DOES_NOT_CONTAIN, TEXT_EQUAL_TO, TEXT_IS_VALID_EMAIL, TEXT_IS_VALID_URL, VALUE_IN_LIST, VALUE_IN_RANGE, CUSTOM_FORMULA }
 
     /**
+     * An enumeration representing the possible directions 
+     *  that one can move within a spreadsheet using the arrow keys.
+     */
+    export enum Direction { UP, DOWN, PREVIOUS, NEXT }
+
+    /**
      * Builder for area charts. For more details, see the Gviz
      *  documentation.
      */
@@ -906,6 +912,61 @@ declare namespace GoogleAppsScript {
     }
 
     /**
+     * A collection of one or more Range instances in the same sheet.
+     * You can use this class to apply operations on collections of non-adjacent ranges or cells.
+     */
+    export interface RangeList {
+      activate(): RangeList;
+      breakApart(): RangeList;
+      clear(): RangeList;
+      clear(options: Object): RangeList;
+      clearContent(): RangeList;
+      clearDataValidations(): RangeList;
+      clearFormat(): RangeList;
+      clearNote(): RangeList;
+      getRanges(): Range[];
+      setBackground(color: string): RangeList;
+      setBackgroundRGB(red: Integer, green: Integer, blue: Integer): RangeList;
+      setBorder(top: boolean, left: boolean, bottom: boolean, right: boolean, vertical: boolean, horizontal: boolean): RangeList;
+      setBorder(top: boolean, left: boolean, bottom: boolean, right: boolean, vertical: boolean, horizontal: boolean, color: string, style: BorderStyle): RangeList;
+      setFontColor(color: string): RangeList;
+      setFontFamily(fontFamily: string): RangeList;
+      setFontLine(fontLine: string): RangeList;
+      setFontSize(size: Integer): RangeList;
+      setFontStyle(fontStyle: string): RangeList;
+      setFontWeight(fontWeight: string): RangeList;
+      setFormula(formula: string): RangeList;
+      setFormulaR1C1(formula: string): RangeList;
+      setHorizontalAlignment(alignment: string): RangeList;
+      setNote(note: string): RangeList;
+      setNumberFormat(numberFormat: string): RangeList;
+      setShowHyperlink(showHyperlink: boolean): RangeList;
+      setTextDirection(direction: TextDirection): RangeList;
+      setTextRotation(degrees: Integer): RangeList;
+      setValue(value: Object): RangeList;
+      setVerticalAlignment(alignment: string): RangeList;
+      setVerticalText(isVertical: boolean): RangeList;
+      setWrap(isWrapEnabled: boolean): RangeList;
+      setWrapStrategy(strategy: WrapStrategy): RangeList;
+    }
+
+    /**
+     * Access the current active selection in the active sheet.
+     * A selection is the set of cells the user has highlighted in the sheet, 
+     *  which can be non-adjacent ranges. 
+     * One cell in the selection is the current cell,
+     *  where the user's current focus is. 
+     * The current cell is highlighted with a darker border in the Google Sheets UI.
+     */
+    export interface Selection {
+      getActiveRange(): Range;
+      getActiveRangeList(): RangeList;
+      getActiveSheet(): Sheet;
+      getCurrentCell(): Range;
+      getNextDataRange(direction: Direction): Range;
+    }
+
+    /**
      * Access and modify spreadsheet sheets. Common operations
      *  are renaming a sheet and accessing range objects from the sheet.
      */
@@ -946,6 +1007,7 @@ declare namespace GoogleAppsScript {
       getRange(row: Integer, column: Integer, numRows: Integer, numColumns: Integer): Range;
       getRange(a1Notation: string): Range;
       getRowHeight(rowPosition: Integer): Integer;
+      getSelection(): Selection;
       getSheetId(): Integer;
       getSheetName(): string;
       getSheetValues(startRow: Integer, startColumn: Integer, numRows: Integer, numColumns: Integer): Object[][];
@@ -1584,6 +1646,16 @@ declare namespace GoogleAppsScript {
        */
       MAX
     }
+
+    /**
+     * An enumerations of text directions.
+     */
+    export enum TextDirection { LEFT_TO_RIGHT, RIGHT_TO_LEFT }
+
+    /**
+     * An enumeration of the strategies used to handle cell text wrapping.
+     */
+    export enum WrapStrategy { WRAP, OVERFLOW, CLIP}
   }
 }
 
